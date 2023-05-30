@@ -1,5 +1,7 @@
 #pragma once
 #include <memory>
+
+#include "GLFW/glfw3.h"
 namespace EtinanMesh 
 {
 	class EngineUI
@@ -7,12 +9,19 @@ namespace EtinanMesh
 	public:
 		~EngineUI();
 		
-		
-		static EngineUI* Create();
+		 static void CreateGUI();
 
 	private:
-		static EngineUI* s_EngineUI;
 		EngineUI();
+		void SetContext();
+		void Begin();
+		void End();
+		void ShowDemoImGui();
+		
+	private:
+		GLFWwindow *m_Window = nullptr;
+		static std::unique_ptr<EngineUI> s_EngineUI;
+		bool m_IsShowDemoImGui = false;
 		
 	};
 

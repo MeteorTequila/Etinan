@@ -4,6 +4,7 @@
 
 # visual studio
 .vs/
+out/
 
 # vscode ================================
 .vscode/

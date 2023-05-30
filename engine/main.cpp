@@ -1,10 +1,10 @@
 #include "Application.h"
 #include <iostream>
+
 int main(int argc, char** argv)
 {
 
-	EtinanMesh::Create();
-	
+	EtinanMesh::Init();
 	
 	std::getchar();
 
