@@ -1,9 +1,13 @@
-﻿# CMakeList.txt: 顶层 CMake 项目文件，在此处执行全局配置
-# 并包含子项目。
-#
+﻿
 cmake_minimum_required (VERSION 3.12)
 
 project ("EtinanEngine")
 
-# 包含子项目。
+set(app_root_dir ${CMAKE_CURRENT_SOURCE_DIR})
+set(engine_root_dir ${CMAKE_CURRENT_SOURCE_DIR}/engine)
+set(vendor_root_dir ${CMAKE_CURRENT_SOURCE_DIR}/vendor)
+
 add_subdirectory ("engine")
+add_subdirectory ("vendor")
+
+

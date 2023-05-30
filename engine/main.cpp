@@ -3,9 +3,7 @@
 int main(int argc, char** argv)
 {
 
-	
-
-	auto app = EtinanMesh::Create();
+	EtinanMesh::Create();
 	
 	
 	std::getchar();

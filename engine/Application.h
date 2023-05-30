@@ -1,10 +1,11 @@
 #pragma once
-#include "EtinanEngine.h"
+
 
 namespace EtinanMesh
 {
 	
-	EtinanEngine* Create();
+
+	void Create();
 
 	void Run();
 

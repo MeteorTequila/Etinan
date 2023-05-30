@@ -7,6 +7,26 @@ file(GLOB_RECURSE engine_source_files "${CMAKE_CURRENT_SOURCE_DIR}/*.cpp")
 
 
 
-# 将源代码添加到此项目的可执行文件。
 add_executable (${PROJECT_NAME} ${engine_head_files} ${engine_source_files})
 
+target_compile_definitions(
+	${PROJECT_NAME}
+	PRIVATE
+	"GLFW_INCLUDE_NONE"
+)
+
+target_include_directories(
+	${PROJECT_NAME}
+	PRIVATE
+	${engine_root_dir}
+	${vendor_root_dir}/imgui
+
+)
+
+target_link_libraries(
+	${PROJECT_NAME}
+	PRIVATE
+	glfw
+	glad
+	imgui
+)

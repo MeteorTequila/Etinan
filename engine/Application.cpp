@@ -1,22 +1,28 @@
 #include "Application.h"
+#include <memory>
+
+#include "EtinanEngine.h"
+#include "GUI/EtinanGui.h"
 
 namespace EtinanMesh 
 {
-	static EtinanEngine* s_EngineRuntime = nullptr;
+	EtinanEngine *runtime = nullptr;
+	EngineUI *GUI = nullptr;
+	
 
-	EtinanEngine* Create()
+	void Create()
 	{
-		s_EngineRuntime = new EtinanEngine();
-		return s_EngineRuntime;
+		runtime = EtinanEngine::Create();
+		GUI = EngineUI::Create();
 	}
 
 	void Run() 
 	{
-
+		
 	}
 
 	void Shutdown()
 	{
-		delete  s_EngineRuntime;
+		
 	}
 }
