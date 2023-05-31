@@ -1,12 +1,11 @@
 #include "Application.h"
 #include <iostream>
 
-int main(int argc, char** argv)
+int main()
 {
 
-	EtinanMesh::Init();
-	
-	std::getchar();
+	auto app = EtinanMesh::CreateApplication();
+	app->Run();
 
 	return 0;
 }

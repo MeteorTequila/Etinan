@@ -4,24 +4,26 @@
 #include "GLFW/glfw3.h"
 namespace EtinanMesh 
 {
-	class EngineUI
+	class EngineGUI
 	{
 	public:
-		~EngineUI();
-		
-		 static void CreateGUI();
+		~EngineGUI();
+		EngineGUI(GLFWwindow* window);
+		void Render();
 
 	private:
-		EngineUI();
+		
 		void SetContext();
 		void Begin();
 		void End();
+	private:
+		// 自定义的界面
 		void ShowDemoImGui();
+		void ShowCustomGui();
 		
 	private:
 		GLFWwindow *m_Window = nullptr;
-		static std::unique_ptr<EngineUI> s_EngineUI;
-		bool m_IsShowDemoImGui = false;
+		bool m_IsShowDemoGUI = false;
 		
 	};
 

@@ -4,39 +4,38 @@
 #include "backends/imgui_impl_glfw.h"
 #include "backends//imgui_impl_opengl3.h"
 
-#include "EtinanEngine.h"
 
 namespace EtinanMesh
 {
 
-	std::unique_ptr<EngineUI> EngineUI::s_EngineUI = nullptr;
 
-	void EngineUI::CreateGUI()
-	{
-		
-		s_EngineUI.reset(new EngineUI);
-	}
-
-	EngineUI::~EngineUI() 
+	EngineGUI::~EngineGUI() 
 	{
 		ImGui_ImplOpenGL3_Shutdown();
 		ImGui_ImplGlfw_Shutdown();
 		ImGui::DestroyContext();
-
-		s_EngineUI.reset();
 	}
 
-	EngineUI::EngineUI()
+	EngineGUI::EngineGUI(GLFWwindow* window):m_Window(window)
 	{
 		printf(" - - - - - Create GUI!\n");
 		SetContext();
-		Begin();
-		m_IsShowDemoImGui = true;
-		ShowDemoImGui(); 
-		End();
+		m_IsShowDemoGUI = true;
+		
+		
 	}
 
-	void EngineUI::SetContext() 
+	void EngineGUI::Render()
+	{
+		Begin();
+		ShowDemoImGui();
+
+		ShowCustomGui();
+		End();
+		
+	}
+
+	void EngineGUI::SetContext() 
 	{
 		// Setup Dear ImGui context
 		IMGUI_CHECKVERSION();
@@ -44,40 +43,58 @@ namespace EtinanMesh
 		ImGuiIO& io = ImGui::GetIO(); (void)io;
 		io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard;     // Enable Keyboard Controls
 		io.ConfigFlags |= ImGuiConfigFlags_NavEnableGamepad;      // Enable Gamepad Controls
+		io.ConfigFlags |= ImGuiConfigFlags_DockingEnable;         // Enable Docking
+		io.ConfigFlags |= ImGuiConfigFlags_ViewportsEnable;       // Enable Multi-Viewport / Platform Windows
 
 		// Setup Dear ImGui style
 		ImGui::StyleColorsDark();
 		//ImGui::StyleColorsLight();
+		ImGuiStyle& style = ImGui::GetStyle();
+		if (io.ConfigFlags & ImGuiConfigFlags_ViewportsEnable)
+		{
+			style.WindowRounding = 0.0f;
+			style.Colors[ImGuiCol_WindowBg].w = 1.0f;
+		}
 
 		// Setup Platform/Renderer backends
-		EtinanEngine &app = EtinanEngine::GetEngineInstance();
-		m_Window = app.GetWindow();
-
 		ImGui_ImplGlfw_InitForOpenGL(m_Window, true);
 		ImGui_ImplOpenGL3_Init("#version 330");
-
-		// Our state
-		bool show_demo_window = true;
-		bool show_another_window = false;
-		ImVec4 clear_color = ImVec4(0.45f, 0.55f, 0.60f, 1.00f);
 	}
 
-	void EngineUI::Begin()
+	void EngineGUI::Begin()
 	{
 		ImGui_ImplOpenGL3_NewFrame();
 		ImGui_ImplGlfw_NewFrame();
 		ImGui::NewFrame();
 	}
 
-	void EngineUI::End()
+	void EngineGUI::End()
 	{
 		ImGui::Render();
 		ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
+		ImGuiIO& io = ImGui::GetIO(); (void)io;
+		if (io.ConfigFlags & ImGuiConfigFlags_ViewportsEnable)
+		{
+			GLFWwindow* backup_current_context = glfwGetCurrentContext();
+			ImGui::UpdatePlatformWindows();
+			ImGui::RenderPlatformWindowsDefault();
+			glfwMakeContextCurrent(backup_current_context);
+		}
 	}
 
-	void EngineUI::ShowDemoImGui()
+	void EngineGUI::ShowDemoImGui()
 	{
-		ImGui::ShowDemoWindow(&m_IsShowDemoImGui);
+
+		ImGui::ShowDemoWindow(&m_IsShowDemoGUI);
+
+	}
+
+	void EngineGUI::ShowCustomGui()
+	{
+
+		ImGui::Begin("Hello, world!");
+		ImGui::Text("This is some useful text.");
+		ImGui::End();
 	}
 
 	
