@@ -30,3 +30,10 @@ file(
 add_library(imgui STATIC ${imgui_sources} ${imgui_impl})
 target_include_directories(imgui PUBLIC ${imgui_root_dir} ${OPENGL_INCLUDE_DIR})
 target_link_libraries(imgui PUBLIC glfw ${OPENGL_LIBRARIES})
+
+
+# glm
+add_subdirectory(glm)
+
+# assmip
+add_subdirectory(assimp)

@@ -20,6 +20,7 @@ target_include_directories(
 	PRIVATE
 	${engine_root_dir}
 	${vendor_root_dir}/imgui
+	${vendor_root_dir}/glm
 
 )
 
@@ -29,4 +30,5 @@ target_link_libraries(
 	glfw
 	glad
 	imgui
+	assimp
 )

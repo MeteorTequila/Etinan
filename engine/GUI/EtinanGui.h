@@ -16,15 +16,21 @@ namespace EtinanMesh
 		void SetContext();
 		void Begin();
 		void End();
-	private:
-		// 自定义的界面
-		void ShowDemoImGui();
-		void ShowCustomGui();
-		
+	
 	private:
 		GLFWwindow *m_Window = nullptr;
 		bool m_IsShowDemoGUI = false;
 		
+		
+		// 自定义界面
+	
+		// 界面参数
+	public:
+		int m_GUICounter = 0;
+	private:
+		// 界面布局
+		void ShowDemoImGui();
+		void ShowCustomGui();
 	};
 
 }

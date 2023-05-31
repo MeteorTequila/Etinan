@@ -1,3 +1,4 @@
+#include "Debug/Macros.h"
 #include "EtinanGui.h"
 
 #include "imgui.h"
@@ -18,7 +19,7 @@ namespace EtinanMesh
 
 	EngineGUI::EngineGUI(GLFWwindow* window):m_Window(window)
 	{
-		printf(" - - - - - Create GUI!\n");
+		ETN_PRINT(" - - - - - Create GUI!\n");
 		SetContext();
 		m_IsShowDemoGUI = true;
 		
@@ -89,11 +90,19 @@ namespace EtinanMesh
 
 	}
 
+	// - - - - - - - - - - - - - - - - - - - - - - - - 
+	// - - - - - - - - 自定义GUI界面  - - - - - - - - - 
+	// - - - - - - - - - - - - - - - - - - - - - - - - 
+
 	void EngineGUI::ShowCustomGui()
 	{
 
 		ImGui::Begin("Hello, world!");
 		ImGui::Text("This is some useful text.");
+		if (ImGui::Button("Button")) {
+			m_GUICounter++;
+		}
+		ImGui::Text("counter = %d", m_GUICounter);
 		ImGui::End();
 	}
 

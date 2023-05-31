@@ -38,8 +38,9 @@ namespace EtinanMesh
 		{
 			m_Renderer->Clear();
 
-			m_GUI->Render();
 			m_Renderer->Render();
+			m_GUI->Render();
+
 			m_Renderer->Update();
 		}
 		//m_Renderer->Run();

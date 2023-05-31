@@ -7,6 +7,7 @@ namespace EtinanMesh
 	Renderer::Renderer() 
 	{
 		InitContext();
+		PrepareToRender();
 	}
 
 	void Renderer::InitContext() 
@@ -14,6 +15,7 @@ namespace EtinanMesh
 		ETN_PRINT("Init Renderer Context!\n");
 		InitGLFW();
 		InitOpenGLContext();
+
 	}
 
 	void Renderer::InitGLFW()
@@ -48,6 +50,12 @@ namespace EtinanMesh
 		printf("version : (%s)\n", glGetString(GL_VERSION));
 	}
 
+	void Renderer::BindCallbacks()
+	{
+		// 创建一个渲染对象
+		m_Renderable =  std::make_shared<Renderable>();
+	}
+
 	void Renderer::Update() 
 	{
 		glfwSwapBuffers(m_Window);
@@ -60,9 +68,21 @@ namespace EtinanMesh
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	}
 
+	void Renderer::PrepareToRender()
+	{
+		
+
+		
+		
+	}
+
 	void Renderer::Render()
 	{
-		ETN_PRINT("Renderer rendering\n");
+		//ETN_PRINT("Renderer rendering\n");
+		m_Renderable->m_Shader->Bind();
+		m_Renderable->m_VertexArray->Bind();
+		glDrawArrays(GL_TRIANGLES, 0, 3);
+		
 	}
 
 
